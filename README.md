@@ -3,6 +3,7 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 
 **Architecture**
 
+```mermaid
 graph TD
     A["Datadog / Alertmanager"] -->|Webhook Post| B["FastAPI Webhook Ingestion"]
     B -->|Enqueue Job| C["Worker Process (Celery)"]
