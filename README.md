@@ -3,6 +3,9 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 
 **Architecture**
 
+<img width="583" height="515" alt="image" src="https://github.com/user-attachments/assets/d636b39b-5c57-40af-a27f-fdbe26a6427f" />
+
+
 ┌─────────────────────────┐
 │ Datadog / Alertmanager  │
 └────────────┬────────────┘
