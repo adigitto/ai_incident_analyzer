@@ -4,19 +4,7 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 **Architecture**
 
 ```mermaid
-graph TD
-    A["Datadog / Alertmanager"] -->|Webhook Post| B["FastAPI Webhook Ingestion"]
-    B -->|Enqueue Job| C["Worker Process (Celery)"]
-    B -->|"Fetch Logs"| D["Loki / Datadog"]
-    D -->|Context Data| C
-    C -->|Semantic Search| E["Vector DB (pgvector)"]
-    E -->|Relevant Context| C
-    C -->|Context + Logs| F["Gemini Flash Engine"]
-    F -->|Notification| G["Slack / Teams Notification"]
-
-    style F fill:#f9f,stroke:#333,stroke-width:2px
-
-    
+   
 ┌─────────────────────────┐
 │ Datadog / Alertmanager  │
 └────────────┬────────────┘
