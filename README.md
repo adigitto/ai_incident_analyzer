@@ -7,12 +7,12 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 graph TD
     A["Datadog / Alertmanager"] -->|Webhook Post| B["FastAPI Webhook Ingestion"]
     B -->|Enqueue Job| C["Worker Process (Celery)"]
-    B -->|"Fetch Logs (Time-Window)"| D["Loki / Datadog"]
+    B -->|"Fetch Logs"| D["Loki / Datadog"]
     D -->|Context Data| C
-    C -->|Semantic Search| E["Vector DB (pgvector)<br/>(Runbooks, Postmortems)"]
+    C -->|Semantic Search| E["Vector DB (pgvector)"]
     E -->|Relevant Context| C
-    C -->|"Context + Logs"| F["Gemini 2.5 Flash Engine<br/>- Root Cause Analysis<br/>- Remediation Commands<br/>- Escalation"]
-    F -->|Notification| G["Slack / Teams Notification<br/>(Interactive Block Engine with RCA & Actions)"]
+    C -->|Context + Logs| F["Gemini Flash Engine"]
+    F -->|Notification| G["Slack / Teams Notification"]
 
     style F fill:#f9f,stroke:#333,stroke-width:2px
 
