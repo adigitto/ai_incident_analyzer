@@ -6,33 +6,6 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 <img width="583" height="515" alt="image" src="https://github.com/user-attachments/assets/d636b39b-5c57-40af-a27f-fdbe26a6427f" />
 
 
-┌─────────────────────────┐
-│ Datadog / Alertmanager  │
-└────────────┬────────────┘
-             │ Webhook Post
-             ▼
-┌─────────────────────────┐     Fetch Logs        ┌────────────────────────┐
-│ FastAPI Webhook Ingestion├─────────────────────►│ Loki/Datadog
-└────────────┬────────────┘     (Time-Window)     └───────────┬────────────┘
-             │ Enqueue Job                                    │ Context Data
-             ▼                                                ▼
-┌─────────────────────────┐     Semantic Search  ┌────────────────────────┐
-│ Worker Process (Celery) ├─────────────────────►│ Vector DB (pgvector)   │
-└────────────┬────────────┘                      │ (Runbooks, Postmortems)│
-             │                                   └───────────┬────────────┘
-             │ Context + Logs                                │ Relevant Context
-             ▼                                               ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          Gemini 2.5 Flash Engine                        │
-│         - Root Cause Analysis  - Remediation Commands  - Escalation     │
-└────────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│ Slack/Teams Notification (Interactive Block Engine with RCA & Actions)   │
-└─────────────────────────────────────────────────────────────────────────
-
-
 **High Level Steps:**
 We need to create the following Python classes/modules for our incident analyzer:
 1. **Payload Standardization** - We need an ingestion service that normalizes webhook payloads from Datadog or Prometheus Alertmanager into a uniform schema (use pydantic, refer schema.py)
