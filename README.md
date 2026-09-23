@@ -3,8 +3,6 @@ AI analyzer to analyze incidents that get alerted to SRE/Developers using Gemini
 
 **Architecture**
 
-```mermaid
-   
 ┌─────────────────────────┐
 │ Datadog / Alertmanager  │
 └────────────┬────────────┘
